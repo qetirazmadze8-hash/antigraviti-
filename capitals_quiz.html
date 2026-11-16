@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>მსოფლიოს დედაქალაქების გამოწვევა</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.97); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-0 m-0">
+
+  <div class="max-w-3xl mx-auto p-3 sm:p-5">
+
+    <!-- ჰედერი -->
+    <header class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-4 border-b border-[var(--card-border)]">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white text-xl shadow-sm">
+          🌍
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-[var(--foreground)] flex items-center gap-2">
+            მსოფლიოს დედაქალაქების გამოწვევა
+            <span class="text-xs px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 font-medium border border-sky-200 dark:border-sky-800">VII კლასი</span>
+          </h1>
+          <p class="text-xs text-[var(--muted-foreground)]">გეოგრაფიული ვიქტორინა • ქვეყნები, დედაქალაქები და შემეცნებითი ფაქტები</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="soundToggleBtn" onclick="toggleSound()" class="p-2 rounded-lg border border-[var(--card-border)] bg-[var(--card)] hover:bg-[var(--accent)] text-xs text-[var(--foreground)] transition-colors flex items-center gap-1.5" title="ხმის ჩართვა/გამორთვა">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden sm:inline text-[11px] font-medium">ხმა</span>
+        </button>
+        <button onclick="toggleTeacherGuide()" class="px-2.5 py-2 rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-200 text-xs hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-colors flex items-center gap-1.5 font-medium shadow-xs">
+          <span>📋</span>
+          <span class="text-[11px]">პედაგოგიური ბარათი</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- მასწავლებლის მეთოდოლოგიური ბარათი -->
+    <section id="teacherGuideSection" class="hidden mb-4 p-4 rounded-xl bg-amber-50/95 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/80 text-xs text-amber-900 dark:text-amber-100 animate-pop leading-relaxed">
+      <div class="flex items-start justify-between gap-3 mb-2">
+        <h2 class="font-bold text-sm flex items-center gap-1.5 text-amber-950 dark:text-amber-200">
+          <span>👩‍🏫</span> მასწავლებლის მეთოდოლოგიური გზამკვლევი
+        </h2>
+        <button onclick="toggleTeacherGuide()" class="text-amber-700 dark:text-amber-300 hover:text-amber-950 font-bold px-2 py-0.5">✕</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-amber-200/60 dark:border-amber-800/60">
+        <div>
+          <p class="font-semibold text-amber-950 dark:text-amber-100">🎯 სასწავლო მიზანი:</p>
+          <p class="text-[11px] text-amber-800 dark:text-amber-200 mt-0.5">მოსწავლე განასხვავებს და აკავშირებს მსოფლიოს ქვეყნებსა და მათ დედაქალაქებს კონტინენტების მიხედვით; იგებს საკვანძო გეოგრაფიულ და კულტურულ ფაქტებს.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-amber-950 dark:text-amber-100">🧠 დისტრაქტორების პედაგოგიური ლოგიკა:</p>
+          <p class="text-[11px] text-amber-800 dark:text-amber-200 mt-0.5">ყველა არასწორი ვარიანტი შერჩეულია იმავე ქვეყნის რეალური, ცნობილი ქალაქებიდან (მაგ. ბერლინი vs მიუნხენი, ვაშინგტონი vs ნიუ-იორკი), რაც მოსწავლეს ეხმარება ტიპური შეცდომების გადალახვაში.</p>
+        </div>
+        <div class="sm:col-span-2">
+          <p class="font-semibold text-amber-950 dark:text-amber-100">📊 შეფასება & უსაფრთხოება:</p>
+          <p class="text-[11px] text-amber-800 dark:text-amber-200 mt-0.5">თითოეულ კონტინენტზე 8 კითხვაა (80 ქულა). სულ 32 ქვეყანა (320 ქულა). პროგრესის დაფა ასახავს თითოეული კონტინენტის ათვისების დონეს. პირადი მონაცემები არ გროვდება.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. კონტინენტის შერჩევის ეკრანი (CONTINENT SELECTOR) -->
+    <section id="continentSelectScreen" class="space-y-4">
+      <div class="p-5 rounded-2xl bg-[var(--card)] border border-[var(--card-border)] text-center shadow-2xs">
+        <h2 class="text-lg sm:text-xl font-extrabold text-[var(--foreground)] mb-1">
+          აირჩიე კონტინენტი გამოსაცდელად
+        </h2>
+        <p class="text-xs text-[var(--muted-foreground)] max-w-md mx-auto">
+          თითოეულ კონტინენტზე გელოდება 8 ქვეყანა. სწორ პასუხზე გაიგებ საინტერესო გეოგრაფიულ ფაქტს!
+        </p>
+      </div>
+
+      <!-- 4 კონტინენტის ბარათი -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        
+        <!-- ევროპა -->
+        <div onclick="selectContinent('europe')" class="group p-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] hover:border-indigo-400 dark:hover:border-indigo-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-100 dark:border-indigo-900">🏰</span>
+              <div>
+                <h3 class="font-bold text-base text-[var(--foreground)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">ევროპა</h3>
+                <span class="text-[11px] text-[var(--muted-foreground)]">8 ქვეყანა • 80 ქულა</span>
+              </div>
+            </div>
+            <span id="badge-europe" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              დაუწყებელი
+            </span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-semibold text-[var(--muted-foreground)]">
+              <span>პროგრესი</span>
+              <span id="scoreText-europe">0 / 80 ქულა</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div id="progBar-europe" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- აზია -->
+        <div onclick="selectContinent('asia')" class="group p-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] hover:border-rose-400 dark:hover:border-rose-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl p-2 rounded-xl bg-rose-50 dark:bg-rose-950/70 border border-rose-100 dark:border-rose-900">🏯</span>
+              <div>
+                <h3 class="font-bold text-base text-[var(--foreground)] group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">აზია</h3>
+                <span class="text-[11px] text-[var(--muted-foreground)]">8 ქვეყანა • 80 ქულა</span>
+              </div>
+            </div>
+            <span id="badge-asia" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              დაუწყებელი
+            </span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-semibold text-[var(--muted-foreground)]">
+              <span>პროგრესი</span>
+              <span id="scoreText-asia">0 / 80 ქულა</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div id="progBar-asia" class="h-full bg-rose-500 transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- აფრიკა -->
+        <div onclick="selectContinent('africa')" class="group p-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] hover:border-amber-400 dark:hover:border-amber-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl p-2 rounded-xl bg-amber-50 dark:bg-amber-950/70 border border-amber-100 dark:border-amber-900">🦁</span>
+              <div>
+                <h3 class="font-bold text-base text-[var(--foreground)] group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">აფრიკა</h3>
+                <span class="text-[11px] text-[var(--muted-foreground)]">8 ქვეყანა • 80 ქულა</span>
+              </div>
+            </div>
+            <span id="badge-africa" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              დაუწყებელი
+            </span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-semibold text-[var(--muted-foreground)]">
+              <span>პროგრესი</span>
+              <span id="scoreText-africa">0 / 80 ქულა</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div id="progBar-africa" class="h-full bg-amber-500 transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ამერიკა -->
+        <div onclick="selectContinent('americas')" class="group p-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] hover:border-emerald-400 dark:hover:border-emerald-500 hover:shadow-md transition-all cursor-pointer flex flex-col justify-between">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-100 dark:border-emerald-900">🗽</span>
+              <div>
+                <h3 class="font-bold text-base text-[var(--foreground)] group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">ამერიკა</h3>
+                <span class="text-[11px] text-[var(--muted-foreground)]">8 ქვეყანა • 80 ქულა</span>
+              </div>
+            </div>
+            <span id="badge-americas" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              დაუწყებელი
+            </span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-semibold text-[var(--muted-foreground)]">
+              <span>პროგრესი</span>
+              <span id="scoreText-americas">0 / 80 ქულა</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div id="progBar-americas" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- საერთო შედეგების პანელი (Summary bar) -->
+      <div class="p-4 rounded-2xl bg-[var(--card)] border border-[var(--card-border)] flex flex-wrap items-center justify-between gap-3 shadow-2xs">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📊</span>
+          <div>
+            <div class="text-xs font-bold text-[var(--foreground)]">გლობალური პროგრესი</div>
+            <div class="text-[11px] text-[var(--muted-foreground)]" id="totalScoreOverview">ჯამური ქულა: 0 / 320 • დასრულებულია 0 / 4 კონტინენტი</div>
+          </div>
+        </div>
+        <button onclick="showGlobalDashboard()" class="px-3.5 py-1.5 rounded-xl border border-[var(--card-border)] bg-[var(--card)] hover:bg-[var(--accent)] text-xs font-semibold text-[var(--foreground)] transition-colors">
+          პროგრესის ცხრილი 📋
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. სათამაშო რაუნდის ეკრანი (ROUND SCREEN) -->
+    <section id="roundScreen" class="hidden space-y-4">
+
+      <!-- რაუნდის პროგრესის ჰედერი -->
+      <div class="p-3.5 rounded-xl bg-[var(--card)] border border-[var(--card-border)] shadow-2xs">
+        <div class="flex items-center justify-between text-xs font-semibold mb-2">
+          <div class="flex items-center gap-2">
+            <button onclick="backToContinents()" class="text-[var(--muted-foreground)] hover:text-[var(--foreground)] font-bold flex items-center gap-1 text-xs px-1.5 py-0.5 rounded hover:bg-[var(--accent)]">
+              ← კონტინენტები
+            </button>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <span id="roundContinentBadge" class="px-2 py-0.5 rounded-md font-bold text-[11px]"></span>
+            <span id="roundQuestionBadge" class="text-[var(--muted-foreground)] text-[11px]">კითხვა 1 / 8</span>
+          </div>
+          <div class="flex items-center gap-1.5 font-bold text-[var(--foreground)]">
+            <span>რაუნდის ქულა:</span>
+            <span id="roundScoreDisplay" class="text-sky-600 dark:text-sky-400 text-sm tabular-nums">0</span>
+            <span class="text-[var(--muted-foreground)] text-[11px]">/ 80</span>
+          </div>
+        </div>
+        <div class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div id="roundProgressBar" class="h-full bg-sky-500 transition-all duration-300 ease-out" style="width: 12.5%;"></div>
+        </div>
+      </div>
+
+      <!-- კითხვის ბარათი -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-[var(--card)] border border-[var(--card-border)] shadow-sm space-y-4">
+        
+        <!-- ქვეყნის პრეზენტაცია -->
+        <div class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-[var(--card-border)]">
+          <span id="countryFlag" class="text-4xl filter drop-shadow-sm"></span>
+          <div>
+            <div class="text-[11px] font-semibold text-[var(--muted-foreground)] uppercase tracking-wider">ქვეყანა:</div>
+            <div id="countryName" class="text-lg sm:text-xl font-black text-[var(--foreground)]"></div>
+          </div>
+        </div>
+
+        <h3 class="text-sm sm:text-base font-bold text-[var(--foreground)]">
+          რა არის ამ ქვეყნის დედაქალაქი?
+        </h3>
+
+        <!-- 4 ვარიანტი -->
+        <div id="capitalsOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- განმავითარებელი უკუკავშირი & ფაქტი -->
+        <div id="factFeedbackBox" class="hidden p-3.5 sm:p-4 rounded-xl border animate-pop transition-all text-xs sm:text-sm">
+          <div class="flex items-start gap-2.5">
+            <span id="feedbackSymbol" class="text-xl flex-shrink-0"></span>
+            <div class="space-y-1.5">
+              <div id="feedbackTitleText" class="font-bold text-sm"></div>
+              <div id="feedbackDescription" class="text-xs sm:text-[13px] leading-relaxed"></div>
+              <div class="pt-1.5 mt-1 border-t border-black/10 dark:border-white/10 flex items-start gap-2">
+                <span class="text-xs">💡</span>
+                <p id="countryFactText" class="text-[12px] opacity-90 leading-relaxed italic"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- მოქმედების ღილაკი -->
+        <div class="pt-2 flex justify-end">
+          <button id="nextCountryBtn" onclick="nextQuestion()" class="hidden px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-98 text-white font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center gap-1.5">
+            <span>შემდეგი ქვეყანა</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 3. გლობალური პროგრესის დაფა & შედეგები (SCOREBOARD DASHBOARD) -->
+    <section id="dashboardScreen" class="hidden space-y-4">
+      <div class="p-6 rounded-2xl bg-[var(--card)] border border-[var(--card-border)] shadow-sm text-center animate-pop">
+        <div id="masteryIcon" class="text-5xl mb-2">🌍</div>
+        <h2 id="masteryTitle" class="text-xl sm:text-2xl font-extrabold text-[var(--foreground)] mb-1">
+          გლობალური პროგრესის ცხრილი
+        </h2>
+        <p id="masterySubtitle" class="text-xs sm:text-sm text-[var(--muted-foreground)] mb-5">
+          შეამოწმე შენი მიღწევები მსოფლიოს 4-ვე კონტინენტზე
+        </p>
+
+        <!-- საერთო ქულა -->
+        <div class="max-w-xs mx-auto p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800/80 mb-6">
+          <div class="text-[11px] font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wider mb-1">საერთო რეიტინგი</div>
+          <div class="text-4xl sm:text-5xl font-black text-sky-600 dark:text-sky-400 tabular-nums">
+            <span id="grandTotalScore">0</span><span class="text-lg font-bold text-sky-400">/320</span>
+          </div>
+          <div id="grandRankBadge" class="inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-200/70 dark:bg-sky-900/60 text-sky-800 dark:text-sky-200">
+            ახალგაზრდა მკვლევარი 🧭
+          </div>
+        </div>
+
+        <!-- 4 კონტინენტის დეტალური ცხრილი -->
+        <div class="max-w-lg mx-auto mb-6 text-left border border-[var(--card-border)] rounded-xl overflow-hidden">
+          <table class="w-full text-xs">
+            <thead class="bg-slate-50 dark:bg-slate-900 border-b border-[var(--card-border)] text-[var(--muted-foreground)] font-semibold">
+              <tr>
+                <th class="py-2.5 px-3 text-left">კონტინენტი</th>
+                <th class="py-2.5 px-3 text-center">სწორი / სულ</th>
+                <th class="py-2.5 px-3 text-center">ქულა</th>
+                <th class="py-2.5 px-3 text-right">სტატუსი</th>
+              </tr>
+            </thead>
+            <tbody id="continentsTableBody" class="divide-y divide-[var(--card-border)]">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ღილაკები -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button onclick="backToContinents()" class="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center gap-1.5">
+            <span>🌐</span>
+            <span>კონტინენტის არჩევა</span>
+          </button>
+          <button onclick="resetAllScores()" class="px-5 py-2.5 rounded-xl border border-[var(--card-border)] bg-[var(--card)] hover:bg-[var(--accent)] text-[var(--foreground)] font-semibold text-xs sm:text-sm transition-all flex items-center gap-1.5">
+            <span>🔄</span>
+            <span>თავიდან დაწყება (Reset)</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    /* ============================================================
+       საგნობრივად უზადო მონაცემთა ბაზა (32 ქვეყანა & დედაქალაქი)
+       თითოეულზე: 4 რეალისტური ვარიანტი + საგანმანათლებლო ფაქტი
+       ============================================================ */
+    const GEOGRAPHY_DATA = {
+      europe: {
+        name: "ევროპა",
+        icon: "🏰",
+        badgeClass: "bg-indigo-100 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300",
+        btnClass: "bg-indigo-600 hover:bg-indigo-700",
+        questions: [
+          {
+            country: "საფრანგეთი",
+            flag: "🇫🇷",
+            capital: "პარიზი",
+            options: ["პარიზი", "მარსელი", "ლიონი", "ბორდო"],
+            fact: "პარიზს ხშირად უწოდებენ „სინათლის ქალაქს“ (La Ville Lumière); აქ მდებარეობს მსოფლიოში ერთ-ერთი უდიდესი მუზეუმი — ლუვრი და ცნობილი ეიფელის კოშკი."
+          },
+          {
+            country: "გერმანია",
+            flag: "🇩🇪",
+            capital: "ბერლინი",
+            options: ["მიუნხენი", "ბერლინი", "ფრანკფურტი", "ჰამბურგი"],
+            fact: "ბერლინი ევროკავშირის ყველაზე მჭიდროდ დასახლებული ქალაქია საკუთრივ ქალაქის საზღვრებში და ცნობილია ისტორიული ბრანდენბურგის კარიბჭით."
+          },
+          {
+            country: "იტალია",
+            flag: "🇮🇹",
+            capital: "რომი",
+            options: ["მილანი", "ფლორენცია", "რომი", "ნეაპოლი"],
+            fact: "რომს „მარადიულ ქალაქს“ უწოდებენ. მის შიგნით მდებარეობს მსოფლიოს ყველაზე პატარა სუვერენული სახელმწიფო — ვატიკანი."
+          },
+          {
+            country: "ესპანეთი",
+            flag: "🇪🇸",
+            capital: "მადრიდი",
+            options: ["ბარსელონა", "მადრიდი", "სევილია", "ვალენსია"],
+            fact: "მადრიდი ევროპის ერთ-ერთი ყველაზე მაღალ ადგილზე (ზღვის დონიდან დაახლ. 660 მ) მდებარე დედაქალაქია."
+          },
+          {
+            country: "საბერძნეთი",
+            flag: "🇬🇷",
+            capital: "ათენი",
+            options: ["ათენი", "სალონიკი", "პატრა", "ირაკლიონი"],
+            fact: "ათენი მსოფლიოს ერთ-ერთი უძველესი ქალაქია (3400 წელზე მეტი ისტორიით) და დემოკრატიის ისტორიულ აკვნად ითვლება."
+          },
+          {
+            country: "პოლონეთი",
+            flag: "🇵🇱",
+            capital: "ვარშავა",
+            options: ["კრაკოვი", "გდანსკი", "ვროცლავი", "ვარშავა"],
+            fact: "ვარშავა მდინარე ვისლაზე მდებარეობს; მეორე მსოფლიო ომის შემდეგ მისი ისტორიული ძველი ქალაქი იმდენად ზუსტად აღადგინეს, რომ იუნესკოს მემკვიდრეობად იქცა."
+          },
+          {
+            country: "ნორვეგია",
+            flag: "🇳🇴",
+            capital: "ოსლო",
+            options: ["ბერგენი", "ოსლო", "ტრონჰეიმი", "სტავანგერი"],
+            fact: "ოსლოში ყოველწლიურად საზეიმოდ გაიცემა მშვიდობის დარგში ნობელის პრემია, ხოლო ქალაქი გარშემორტყმულია თვალწარმტაცი ფიორდებით."
+          },
+          {
+            country: "შვეიცარია",
+            flag: "🇨🇭",
+            capital: "ბერნი",
+            options: ["ციურიხი", "ჟენევა", "ბერნი", "ბაზელი"],
+            fact: "ბევრს ციურიხი ან ჟენევა ჰგონია დედაქალაქი, მაგრამ შვეიცარიის ფედერალური დედაქალაქი არის ისტორიული ბერნი!"
+          }
+        ]
+      },
+      asia: {
+        name: "აზია",
+        icon: "🏯",
+        badgeClass: "bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300",
+        btnClass: "bg-rose-600 hover:bg-rose-700",
+        questions: [
+          {
+            country: "იაპონია",
+            flag: "🇯🇵",
+            capital: "ტოკიო",
+            options: ["კიოტო", "ტოკიო", "ოსაკა", "იოკოჰამა"],
+            fact: "ტოკიო მის გარშემო არსებულ მეტროპოლიურ არეალთან ერთად მსოფლიოში ყველაზე მჭიდროდ დასახლებული ურბანული აგლომერაციაა (37 მილიონზე მეტი ადამიანი)."
+          },
+          {
+            country: "ჩინეთი",
+            flag: "🇨🇳",
+            capital: "პეკინი",
+            options: ["შანხაი", "პეკინი", "გუანჯოუ", "ჰონგ-კონგი"],
+            fact: "პეკინში მდებარეობს მსოფლიოს უდიდესი საიმპერატორო სასახლის კომპლექსი — „აკრძალული ქალაქი“, რომელიც 500 წელზე მეტხანს მართავდა იმპერიას."
+          },
+          {
+            country: "ინდოეთი",
+            flag: "🇮🇳",
+            capital: "ნიუ-დელი",
+            options: ["მუმბაი", "კალკუტა", "ნიუ-დელი", "ბანგალორი"],
+            fact: "მიუხედავად იმისა, რომ მუმბაი ინდოეთის უდიდესი ეკონომიკური ცენტრია, ქვეყნის პოლიტიკური დედაქალაქია ნიუ-დელი."
+          },
+          {
+            country: "სამხრეთ კორეა",
+            flag: "🇰🇷",
+            capital: "სეული",
+            options: ["სეული", "პუსანი", "ინჩონი", "ტეგუ"],
+            fact: "სეული უძველესი საიმპერატორო სასახლეებისა და ულტრათანამედროვე ციფრული ტექნოლოგიების გასაოცარი ჰარმონიაა მდინარე ჰანგანზე."
+          },
+          {
+            country: "თურქეთი",
+            flag: "🇹🇷",
+            capital: "ანკარა",
+            options: ["სტამბოლი", "ანკარა", "იზმირი", "ანტალია"],
+            fact: "გავრცელებული შეცდომაა სტამბოლის დასახელება; თურქეთის ოფიციალური დედაქალაქი 1923 წლიდან გახდა ანკარა, რომელიც ანატოლიის გულშია."
+          },
+          {
+            country: "აზერბაიჯანი",
+            flag: "🇦🇿",
+            capital: "ბაქო",
+            options: ["განჯა", "ბაქო", "სუმგაითი", "შაქი"],
+            fact: "ბაქო კასპიის ზღვის უდიდესი პორტია და მდებარეობს ზღვის დონიდან 28 მეტრით დაბლა, რაც მას მსოფლიოში ყველაზე დაბლა მდებარე დედაქალაქად აქცევს!"
+          },
+          {
+            country: "ყაზახეთი",
+            flag: "🇰🇿",
+            capital: "ასტანა",
+            options: ["ალმათი", "ასტანა", "შიმკენტი", "აქტაუ"],
+            fact: "ასტანა ულან-ბატორის შემდეგ მსოფლიოში მეორე ყველაზე ცივი დედაქალაქია ზამთარში და გამოირჩევა ფუტურისტული არქიტექტურით."
+          },
+          {
+            country: "ტაილანდი",
+            flag: "🇹🇭",
+            capital: "ბანგკოკი",
+            options: ["ჩიანგ-მაი", "პუკეტი", "ბანგკოკი", "პატაია"],
+            fact: "ბანგკოკის ოფიციალური საზეიმო ტაიური სახელი გინესის რეკორდებშია შესული, როგორც მსოფლიოში ყველაზე გრძელი გეოგრაფიული სახელი (168 ასო!)."
+          }
+        ]
+      },
+      africa: {
+        name: "აფრიკა",
+        icon: "🦁",
+        badgeClass: "bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300",
+        btnClass: "bg-amber-600 hover:bg-amber-700",
+        questions: [
+          {
+            country: "ეგვიპტე",
+            flag: "🇪🇬",
+            capital: "კაირო",
+            options: ["ალექსანდრია", "კაირო", "გიზა", "ლუქსორი"],
+            fact: "კაირო აფრიკისა და არაბული სამყაროს უდიდესი მეგაპოლისია, რომელიც უძველესი ნილოსის ნაპირას, პირამიდების სიახლოვეს მდებარეობს."
+          },
+          {
+            country: "კენია",
+            flag: "🇰🇪",
+            capital: "ნაირობი",
+            options: ["ნაირობი", "მომბასა", "კისუმუ", "ნაკურუ"],
+            fact: "ნაირობი მსოფლიოში ერთადერთი დედაქალაქია, რომლის საზღვრებშიც ეროვნული საფარის პარკია, სადაც ცათამბჯენების ფონზე ლომები და მარტორქები ცხოვრობენ."
+          },
+          {
+            country: "სამხრეთ აფრიკის რესპუბლიკა",
+            flag: "🇿🇦",
+            capital: "პრეტორია",
+            options: ["იოჰანესბურგი", "პრეტორია", "დურბანი", "პორტ-ელიზაბეთი"],
+            fact: "სამხრეთ აფრიკას 3 ოფიციალური დედაქალაქი აქვს (პრეტორია - აღმასრულებელი, კეიპტაუნი - საკანონმდებლო, ბლუმფონტეინი - სასამართლო). იოჰანესბურგი კი უდიდესი ქალაქია."
+          },
+          {
+            country: "მაროკო",
+            flag: "🇲🇦",
+            capital: "რაბატი",
+            options: ["კასაბლანკა", "მარაკეში", "რაბატი", "ფესი"],
+            fact: "მიუხედავად იმისა, რომ კასაბლანკა ყველაზე დიდი და ცნობილი ქალაქია, სამეფოს პოლიტიკური დედაქალაქი ატლანტის ოკეანის პირას მდებარე რაბატია."
+          },
+          {
+            country: "ნიგერია",
+            flag: "🇳🇬",
+            capital: "აბუჯა",
+            options: ["ლაგოსი", "აბუჯა", "კანო", "იბადანი"],
+            fact: "1991 წლამდე დედაქალაქი სანაპიროზე მდებარე ლაგოსი იყო, შემდეგ კი ქვეყნის გეოგრაფიულ ცენტრში სპეციალურად გაშენებული აბუჯა გახდა."
+          },
+          {
+            country: "ეთიოპია",
+            flag: "🇪🇹",
+            capital: "ადის-აბება",
+            options: ["ადის-აბება", "დირე-დაუა", "ბაჰირ-დარი", "გონდერი"],
+            fact: "ადის-აბება („ახალი ყვავილი“) აფრიკის კავშირის შტაბ-ბინაა და მას ხშირად „აფრიკის პოლიტიკურ დედაქალაქსაც“ უწოდებენ."
+          },
+          {
+            country: "განა",
+            flag: "🇬🇭",
+            capital: "აკრა",
+            options: ["კუმასი", "აკრა", "ტამალე", "ტაკორადი"],
+            fact: "აკრა მდებარეობს გვინეის ყურის სანაპიროზე და დასავლეთ აფრიკის ერთ-ერთი ყველაზე მეგობრული და სწრაფად მზარდი საპორტო ქალაქია."
+          },
+          {
+            country: "ტუნისი",
+            flag: "🇹🇳",
+            capital: "ტუნისი",
+            options: ["ტუნისი", "სფაქსი", "სუსი", "ბიზერტა"],
+            fact: "დედაქალაქი ტუნისი აერთიანებს თანამედროვე ევროპულ კვარტლებს და უძველეს არაბულ მედინას, ხოლო მის მახლობლად ლეგენდარული კართაგენის ნანგრევებია."
+          }
+        ]
+      },
+      americas: {
+        name: "ამერიკა",
+        icon: "🗽",
+        badgeClass: "bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300",
+        btnClass: "bg-emerald-600 hover:bg-emerald-700",
+        questions: [
+          {
+            country: "აშშ (ამერიკის შეერთებული შტატები)",
+            flag: "🇺🇸",
+            capital: "ვაშინგტონი",
+            options: ["ნიუ-იორკი", "ვაშინგტონი", "ლოს-ანჯელესი", "ჩიკაგო"],
+            fact: "ნიუ-იორკი ქვეყნის უდიდესი ფინანსური ცენტრია, მაგრამ დედაქალაქია ვაშინგტონი (კოლუმბიის ოლქი), სადაც თეთრი სახლი და კაპიტოლიუმი მდებარეობს."
+          },
+          {
+            country: "კანადა",
+            flag: "🇨🇦",
+            capital: "ოტავა",
+            options: ["ტორონტო", "მონრეალი", "ოტავა", "ვანკუვერი"],
+            fact: "ტორონტოსა და მონრეალს შორის მეტოქეობის გამო, 1857 წელს დედოფალ ვიქტორიას ბრძანებით ნეიტრალური ოტავა შეირჩა კანადის დედაქალაქად."
+          },
+          {
+            country: "ბრაზილია",
+            flag: "🇧🇷",
+            capital: "ბრაზილია",
+            options: ["რიო-დე-ჟანეირო", "სან-პაულუ", "ბრაზილია", "სალვადორი"],
+            fact: "ქალაქი ბრაზილია 1960 წელს სპეციალურად ააშენეს სულ რაღაც 41 თვეში თვითმფრინავის ფორმის გენგეგმით, რათა მოსახლეობა სანაპიროდან ქვეყნის შიგნით გადაენაცვლა."
+          },
+          {
+            country: "არგენტინა",
+            flag: "🇦🇷",
+            capital: "ბუენოს-აირესი",
+            options: ["ბუენოს-აირესი", "კორდობა", "როსარიო", "მენდოსა"],
+            fact: "ბუენოს-აირესს („კარგი ქარები“) ხშირად „სამხრეთ ამერიკის პარიზს“ უწოდებენ და ის მსოფლიოში ცნობილი ვნებიანი ტანგოს სამშობლოა."
+          },
+          {
+            country: "მექსიკა",
+            flag: "🇲🇽",
+            capital: "მეხიკო",
+            options: ["გვადალახარა", "მეხიკო", "მონტერეი", "კანკუნი"],
+            fact: "მეხიკო აშენებულია უძველესი აცტეკების დედაქალაქ ტენოჩტიტლანის ადგილზე, დამშრალი ტბის ფსკერზე, ზღვის დონიდან 2240 მეტრზე."
+          },
+          {
+            country: "კოლუმბია",
+            flag: "🇨🇴",
+            capital: "ბოგოტა",
+            options: ["მედელინი", "კალი", "ბოგოტა", "კარტახენა"],
+            fact: "ბოგოტა ანდების მაღალმთიან პლატოზე (2640 მ სიმაღლეზე) მდებარეობს და მსოფლიოში ერთ-ერთი ყველაზე მაღალი დედაქალაქია."
+          },
+          {
+            country: "კუბა",
+            flag: "🇨🇺",
+            capital: "ჰავანა",
+            options: ["ჰავანა", "სანტიაგო-დე-კუბა", "კამაგუეი", "ოლგინი"],
+            fact: "ჰავანა კარიბის ზღვის უდიდესი საპორტო ქალაქია, რომელიც განთქმულია ესპანური კოლონიური ციხესიმაგრეებითა და რეტრო ამერიკული ავტომობილებით."
+          },
+          {
+            country: "ჩილე",
+            flag: "🇨🇱",
+            capital: "სანტიაგო",
+            options: ["ვალპარაისო", "სანტიაგო", "კონსეფსიონი", "ანტოფაგასტა"],
+            fact: "სანტიაგო მდებარეობს ანდების დიდებული თოვლიანი მწვერვალების ძირში; აქ ქვეყნის მოსახლეობის დაახლოებით 40% ცხოვრობს."
+          }
+        ]
+      }
+    };
+
+    /* ============================================================
+       თამაშის მდგომარეობა (State Management)
+       ============================================================ */
+    let currentContinentKey = null;
+    let currentQuestionIndex = 0;
+    let roundScore = 0;
+    let isRoundAnswered = false;
+    let soundEnabled = true;
+
+    // შენახული პროგრესი კონტინენტების მიხედვით
+    const progressState = {
+      europe: { completed: false, score: 0, correct: 0, total: 8, history: [] },
+      asia: { completed: false, score: 0, correct: 0, total: 8, history: [] },
+      africa: { completed: false, score: 0, correct: 0, total: 8, history: [] },
+      americas: { completed: false, score: 0, correct: 0, total: 8, history: [] }
+    };
+
+    // ხმოვანი ეფექტები (Web Audio API)
+    let audioCtx = null;
+    function playBeep(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'correct') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.15);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'incorrect') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.exponentialRampToValueAtTime(180, now + 0.18);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        } else if (type === 'fanfare') {
+          [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            o.type = 'sine';
+            o.frequency.value = freq;
+            const t = now + idx * 0.09;
+            g.gain.setValueAtTime(0.15, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+            o.start(t);
+            o.stop(t + 0.25);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundIcon').textContent = soundEnabled ? '🔊' : '🔇';
+    }
+
+    function toggleTeacherGuide() {
+      document.getElementById('teacherGuideSection').classList.toggle('hidden');
+    }
+
+    /* ============================================================
+       კონტინენტის არჩევა და რაუნდის დაწყება
+       ============================================================ */
+    function selectContinent(continentKey) {
+      currentContinentKey = continentKey;
+      currentQuestionIndex = 0;
+      roundScore = 0;
+      isRoundAnswered = false;
+
+      // წინა შედეგების გადატვირთვა ამ კონტინენტისთვის
+      progressState[continentKey].history = [];
+
+      document.getElementById('continentSelectScreen').classList.add('hidden');
+      document.getElementById('dashboardScreen').classList.add('hidden');
+      document.getElementById('roundScreen').classList.remove('hidden');
+
+      const continentData = GEOGRAPHY_DATA[continentKey];
+      const badge = document.getElementById('roundContinentBadge');
+      badge.textContent = `${continentData.icon} ${continentData.name}`;
+      badge.className = `px-2 py-0.5 rounded-md font-bold text-[11px] ${continentData.badgeClass}`;
+
+      loadQuestion(0);
+    }
+
+    function loadQuestion(qIndex) {
+      isRoundAnswered = false;
+      const continent = GEOGRAPHY_DATA[currentContinentKey];
+      const q = continent.questions[qIndex];
+
+      // პროგრესი და ქულა
+      document.getElementById('roundQuestionBadge').textContent = `ქვეყანა ${qIndex + 1} / ${continent.questions.length}`;
+      document.getElementById('roundScoreDisplay').textContent = roundScore;
+      
+      const percent = ((qIndex + 1) / continent.questions.length) * 100;
+      document.getElementById('roundProgressBar').style.width = `${percent}%`;
+
+      // ქვეყნის მონაცემები
+      document.getElementById('countryFlag').textContent = q.flag;
+      document.getElementById('countryName').textContent = q.country;
+
+      // ვარიანტები
+      const container = document.getElementById('capitalsOptionsContainer');
+      container.innerHTML = '';
+      const letters = ['ა', 'ბ', 'გ', 'დ'];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `opt-btn-${idx}`;
+        btn.className = 'w-full p-3.5 rounded-xl border border-[var(--card-border)] bg-[var(--card)] hover:bg-[var(--accent)] text-left text-xs sm:text-sm font-semibold text-[var(--foreground)] transition-all flex items-center gap-3 shadow-2xs hover:border-sky-400 focus:outline-none';
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 text-[var(--foreground)] text-xs font-bold flex items-center justify-center flex-shrink-0">
+            ${letters[idx]}
+          </span>
+          <span class="flex-1">${opt}</span>
+        `;
+        btn.onclick = () => handleAnswer(opt, idx);
+        container.appendChild(btn);
+      });
+
+      // უკუკავშირის დაფარვა
+      document.getElementById('factFeedbackBox').classList.add('hidden');
+      document.getElementById('nextCountryBtn').classList.add('hidden');
+    }
+
+    function handleAnswer(selectedCapital, selectedIndex) {
+      if (isRoundAnswered) return;
+      isRoundAnswered = true;
+
+      const continent = GEOGRAPHY_DATA[currentContinentKey];
+      const q = continent.questions[currentQuestionIndex];
+      const isCorrect = (selectedCapital === q.capital);
+
+      // ისტორიაში შენახვა
+      progressState[currentContinentKey].history.push({
+        country: q.country,
+        flag: q.flag,
+        correctCapital: q.capital,
+        selectedCapital: selectedCapital,
+        isCorrect: isCorrect
+      });
+
+      // ღილაკების დაბლოკვა და შეფერადება
+      const container = document.getElementById('capitalsOptionsContainer');
+      const buttons = container.getElementsByTagName('button');
+
+      q.options.forEach((opt, idx) => {
+        buttons[idx].disabled = true;
+        buttons[idx].classList.remove('hover:bg-[var(--accent)]', 'hover:border-sky-400');
+
+        if (opt === q.capital) {
+          buttons[idx].className = 'w-full p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50/90 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-100 text-left text-xs sm:text-sm font-bold flex items-center gap-3';
+        } else if (idx === selectedIndex && !isCorrect) {
+          buttons[idx].className = 'w-full p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50/90 dark:bg-rose-950/60 text-rose-900 dark:text-rose-100 text-left text-xs sm:text-sm font-medium flex items-center gap-3';
+        } else {
+          buttons[idx].classList.add('opacity-40');
+        }
+      });
+
+      // ქულა და ხმა
+      if (isCorrect) {
+        roundScore += 10;
+        document.getElementById('roundScoreDisplay').textContent = roundScore;
+        playBeep('correct');
+      } else {
+        playBeep('incorrect');
+      }
+
+      // განმავითარებელი უკუკავშირი და ფაქტი
+      const feedbackBox = document.getElementById('factFeedbackBox');
+      const symbol = document.getElementById('feedbackSymbol');
+      const title = document.getElementById('feedbackTitleText');
+      const desc = document.getElementById('feedbackDescription');
+      const fact = document.getElementById('countryFactText');
+
+      feedbackBox.classList.remove('hidden');
+
+      if (isCorrect) {
+        feedbackBox.className = 'p-3.5 sm:p-4 rounded-xl border-2 border-emerald-400 dark:border-emerald-700 bg-emerald-50/95 dark:bg-emerald-950/50 text-emerald-950 dark:text-emerald-100 animate-pop text-xs sm:text-sm';
+        symbol.textContent = '🌟';
+        title.textContent = `სწორია! ${q.capital} ნამდვილად ${q.country}-ს დედაქალაქია (+10 ქულა)`;
+        desc.textContent = 'შესანიშნავი გეოგრაფიული ცოდნაა!';
+      } else {
+        feedbackBox.className = 'p-3.5 sm:p-4 rounded-xl border-2 border-amber-400 dark:border-amber-700 bg-amber-50/95 dark:bg-amber-950/50 text-amber-950 dark:text-amber-100 animate-pop text-xs sm:text-sm';
+        symbol.textContent = '💡';
+        title.textContent = `სწორი პასუხია: ${q.capital}`;
+        desc.textContent = `დაიმახსოვრე: ${selectedCapital} ცნობილი ქალაქია, მაგრამ ${q.country}-ს ოფიციალური დედაქალაქი არის ${q.capital}!`;
+      }
+      fact.textContent = q.fact;
+
+      // შემდეგი ღილაკი
+      const nextBtn = document.getElementById('nextCountryBtn');
+      nextBtn.classList.remove('hidden');
+      if (currentQuestionIndex === continent.questions.length - 1) {
+        nextBtn.innerHTML = '<span>კონტინენტის დასრულება</span> <span>🏆</span>';
+      } else {
+        nextBtn.innerHTML = '<span>შემდეგი ქვეყანა</span> <span>→</span>';
+      }
+    }
+
+    function nextQuestion() {
+      const continent = GEOGRAPHY_DATA[currentContinentKey];
+      if (currentQuestionIndex < continent.questions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion(currentQuestionIndex);
+      } else {
+        finishContinentRound();
+      }
+    }
+
+    function finishContinentRound() {
+      const correctCount = progressState[currentContinentKey].history.filter(h => h.isCorrect).length;
+      progressState[currentContinentKey].completed = true;
+      progressState[currentContinentKey].score = roundScore;
+      progressState[currentContinentKey].correct = correctCount;
+
+      updateContinentCardsUI();
+      showGlobalDashboard();
+      playBeep('fanfare');
+    }
+
+    function updateContinentCardsUI() {
+      let totalEarned = 0;
+      let completedCount = 0;
+
+      for (const [key, state] of Object.entries(progressState)) {
+        totalEarned += state.score;
+        if (state.completed) completedCount++;
+
+        const badge = document.getElementById(`badge-${key}`);
+        const scoreText = document.getElementById(`scoreText-${key}`);
+        const progBar = document.getElementById(`progBar-${key}`);
+
+        if (state.completed) {
+          badge.textContent = `${state.correct} / 8 სწორი`;
+          badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800';
+          scoreText.textContent = `${state.score} / 80 ქულა`;
+          progBar.style.width = `${(state.score / 80) * 100}%`;
+        }
+      }
+
+      document.getElementById('totalScoreOverview').textContent = `ჯამური ქულა: ${totalEarned} / 320 • დასრულებულია ${completedCount} / 4 კონტინენტი`;
+    }
+
+    function showGlobalDashboard() {
+      document.getElementById('continentSelectScreen').classList.add('hidden');
+      document.getElementById('roundScreen').classList.add('hidden');
+      document.getElementById('dashboardScreen').classList.remove('hidden');
+
+      let grandScore = 0;
+      let grandCorrect = 0;
+      const tbody = document.getElementById('continentsTableBody');
+      tbody.innerHTML = '';
+
+      for (const [key, state] of Object.entries(progressState)) {
+        grandScore += state.score;
+        grandCorrect += state.correct;
+        const info = GEOGRAPHY_DATA[key];
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors';
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-bold flex items-center gap-2">
+            <span>${info.icon}</span>
+            <span>${info.name}</span>
+          </td>
+          <td class="py-2.5 px-3 text-center font-semibold">
+            ${state.completed ? `${state.correct} / 8` : '- / 8'}
+          </td>
+          <td class="py-2.5 px-3 text-center font-bold text-sky-600 dark:text-sky-400">
+            ${state.completed ? `${state.score} ქ` : '0 ქ'}
+          </td>
+          <td class="py-2.5 px-3 text-right">
+            ${state.completed 
+              ? (state.score >= 70 
+                  ? '<span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded">ათვისებული 🌟</span>'
+                  : '<span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-950 px-2 py-0.5 rounded">გასამეორებელი 🔄</span>')
+              : '<span class="text-[10px] text-slate-400">გაუსვლელი</span>'
+            }
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('grandTotalScore').textContent = grandScore;
+
+      const rankBadge = document.getElementById('grandRankBadge');
+      const mIcon = document.getElementById('masteryIcon');
+      const mTitle = document.getElementById('masteryTitle');
+
+      if (grandScore >= 280) {
+        mIcon.textContent = '👑';
+        mTitle.textContent = 'გლობალური გეოგრაფიის ოსტატი!';
+        rankBadge.textContent = 'ექსპერტი გეოგრაფი 🌍🏆';
+        rankBadge.className = 'inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-200 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200';
+      } else if (grandScore >= 200) {
+        mIcon.textContent = '🧭';
+        mTitle.textContent = 'გამოცდილი მოგზაური!';
+        rankBadge.textContent = 'მოგზაური მკვლევარი ✈️';
+        rankBadge.className = 'inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-200 dark:bg-sky-900 text-sky-800 dark:text-sky-200';
+      } else {
+        mIcon.textContent = '🗺️';
+        mTitle.textContent = 'კარგი დასაწყისია!';
+        rankBadge.textContent = 'ახალგაზრდა მკვლევარი 🎒';
+        rankBadge.className = 'inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-200 dark:bg-amber-900 text-amber-800 dark:text-amber-200';
+      }
+    }
+
+    function backToContinents() {
+      document.getElementById('roundScreen').classList.add('hidden');
+      document.getElementById('dashboardScreen').classList.add('hidden');
+      document.getElementById('continentSelectScreen').classList.remove('hidden');
+      updateContinentCardsUI();
+    }
+
+    function resetAllScores() {
+      for (const key of Object.keys(progressState)) {
+        progressState[key] = { completed: false, score: 0, correct: 0, total: 8, history: [] };
+        
+        const badge = document.getElementById(`badge-${key}`);
+        badge.textContent = 'დაუწყებელი';
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+        
+        document.getElementById(`scoreText-${key}`).textContent = '0 / 80 ქულა';
+        document.getElementById(`progBar-${key}`).style.width = '0%';
+      }
+      document.getElementById('totalScoreOverview').textContent = 'ჯამური ქულა: 0 / 320 • დასრულებულია 0 / 4 კონტინენტი';
+      backToContinents();
+    }
+  </script>
+</body>
+</html>
